@@ -28,8 +28,8 @@ function Sidebar({ isOpen, onClose }) {
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <button className="close-button" onClick={onClose}>×</button>
       <ul>
-        <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
-        <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
+        <li><Link to="/" onClick={handleLinkClick}>Accueil</Link></li>
+        <li><Link to="/about" onClick={handleLinkClick}>À Propos</Link></li>
         <li><Link to="/contact" onClick={handleLinkClick}>Contact</Link></li>
         <li><Link to="/personnel" onClick={handleLinkClick}>Personnel</Link></li>
       </ul>
@@ -40,17 +40,47 @@ function Sidebar({ isOpen, onClose }) {
 function Home() {
   return (
     <div className="content">
-      <h2>Home</h2>
-      <p>Welcome to the Home page!</p>
+      <h2>Accueil</h2>
+      <p>Bienvenue sur la page d'accueil !</p>
     </div>
   );
 }
 
 function About() {
+  const [data, setData] = useState([]);
+  const spreadsheetId = 'YOUR_SPREADSHEET_ID'; // Replace with your spreadsheet ID
+  const range = 'Sheet1!A1:B10'; // Replace with your desired range
+
+  const handleReadData = async () => {
+    try {
+      const response = await gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: spreadsheetId,
+        range: range,
+      });
+      const result = response.result;
+      const newData = result.values || [];
+      setData(newData);
+      console.log('Data read from Google Sheets:', newData);
+    } catch (error) {
+      console.error('Error reading data from Google Sheets:', error);
+    }
+  };
+
   return (
     <div className="content">
-      <h2>About</h2>
-      <p>This is the About page.</p>
+      <h2>À Propos</h2>
+      <p>Ceci est la page "À propos".</p>
+      <div>
+        <button onClick={handleReadData}>
+          Lire les données Google Sheets
+        </button>
+        {/* Display Data */}
+        <ul>
+          {data.map((row, index) => (
+            <li key={index}>{row.join(', ')}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -59,7 +89,7 @@ function Contact() {
   return (
     <div className="content">
       <h2>Contact</h2>
-      <p>Contact us here.</p>
+      <p>Contactez-nous ici.</p>
     </div>
   );
 }
@@ -69,7 +99,7 @@ function Personnel() {
     <div className="content">
       <h2>Personnel</h2>
       <div className="green-container">
-        <h3>Our Team</h3>
+        <h3>Notre Équipe</h3>
         <ul>
           <li><span className="red-vignette">John Doe</span></li>
           <li><span className="red-vignette">Jane Smith</span></li>

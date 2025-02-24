@@ -37,4 +37,7 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+  },
 })
