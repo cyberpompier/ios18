@@ -20,13 +20,18 @@ function Footer() {
 }
 
 function Sidebar({ isOpen, onClose }) {
+  const handleLinkClick = () => {
+    onClose();
+  };
+
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <button className="close-button" onClick={onClose}>×</button>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
+        <li><Link to="/about" onClick={handleLinkClick}>About</Link></li>
+        <li><Link to="/contact" onClick={handleLinkClick}>Contact</Link></li>
+        <li><Link to="/personnel" onClick={handleLinkClick}>Personnel</Link></li>
       </ul>
     </div>
   );
@@ -59,6 +64,22 @@ function Contact() {
   );
 }
 
+function Personnel() {
+  return (
+    <div className="content">
+      <h2>Personnel</h2>
+      <div className="green-container">
+        <h3>Our Team</h3>
+        <ul>
+          <li><span className="red-vignette">John Doe</span></li>
+          <li><span className="red-vignette">Jane Smith</span></li>
+          <li><span className="red-vignette">Peter Jones</span></li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -79,6 +100,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/personnel" element={<Personnel />} />
         </Routes>
         <Footer />
       </div>

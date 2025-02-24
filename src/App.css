@@ -100,3 +100,35 @@
   padding: 80px 20px 20px 20px; /* Adjusted top padding to account for fixed header */
   flex: 1;
 }
+
+/* Personnel Page */
+.green-container {
+  background-color: lightgreen;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.green-container h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.green-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.green-container li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.red-vignette {
+  background-color: #ff6666;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
