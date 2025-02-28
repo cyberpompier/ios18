@@ -27,7 +27,7 @@ export default defineConfig({
       }
     })
   ],
-  base: './',
+  base: './', // Changed base path to relative
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
